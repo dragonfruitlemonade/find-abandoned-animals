@@ -1,15 +1,15 @@
-import {sidoList} from "@/util/locationData";
-import {theme} from "antd";
-import {useEffect, useState} from "react";
+import { sidoList } from "@/util/locationData";
+import { theme } from "antd";
+import { useEffect, useState } from "react";
 import FilterUI from "./Filter.presenter";
-import {IFilterProps} from "./Filter.types";
+import { IFilterProps } from "./Filter.types";
 import _ from "lodash";
 
-export default function Filter(props: IFilterProps) {
+export default function Filter(props: any) {
   const [filterConditions, setFilterConditions] = useState([] as any);
   const [filterableColumns, _] = useState([
-    {value: "upkind", label: "동물 종류", disabled: false},
-    {value: "upr_cd", label: "시/도", disabled: false},
+    { value: "upkind", label: "동물 종류", disabled: false },
+    { value: "upr_cd", label: "시/도", disabled: false },
   ]);
 
   /* TODO: 
@@ -52,9 +52,9 @@ export default function Filter(props: IFilterProps) {
     {
       column: "upkind",
       options: [
-        {value: "417000", label: "개"},
-        {value: "422400", label: "고양이"},
-        {value: "429900", label: "기타"},
+        { value: "417000", label: "개" },
+        { value: "422400", label: "고양이" },
+        { value: "429900", label: "기타" },
       ],
     },
     {
@@ -70,7 +70,7 @@ export default function Filter(props: IFilterProps) {
   const [filterColumn, setFilterColumn] = useState("");
   const [filterOptionsByColumn, setFilterOptionsByColumn] = useState([] as any);
 
-  const themeToken = {...theme.useToken().token};
+  const themeToken = { ...theme.useToken().token };
 
   const handleChangeSelectColumn = (value: string, _: any, index: number) => {
     const selectedColumn = filterableColumns.find(
@@ -99,7 +99,7 @@ export default function Filter(props: IFilterProps) {
   const handleChangeSelectOption = (value: string) => {
     const newFilterConditions = [...filterConditions];
     const tempCondition = newFilterConditions.find(
-      (condition: {key: string}) => condition.key === filterColumn
+      (condition: { key: string }) => condition.key === filterColumn
     );
     tempCondition.value = value;
     setFilterConditions(newFilterConditions);
@@ -107,7 +107,7 @@ export default function Filter(props: IFilterProps) {
 
   useEffect(() => {
     let filterQuery = "";
-    filterConditions.forEach((condition: {key: any; value: any}) => {
+    filterConditions.forEach((condition: { key: any; value: any }) => {
       filterQuery += `&${condition.key}=${condition.value}`;
     });
     props.setAppliedFilter(filterQuery);
@@ -120,7 +120,7 @@ export default function Filter(props: IFilterProps) {
   };
 
   const handleAddFilter = () => {
-    setFilterConditions((prev: any[]) => [...prev, {key: null, value: null}]);
+    setFilterConditions((prev: any[]) => [...prev, { key: null, value: null }]);
   };
 
   return (
