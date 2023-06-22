@@ -29,10 +29,10 @@ export default function SignupForm(props: any) {
     setPassword(event.target.value);
   };
 
-  const onChangePasswordCheck = (event :any) => {
-      setPasswordError(event.target.value !== password);
-      setPasswordCheck(event.target.value);
-    }
+  const onChangePasswordCheck = (event: any) => {
+    setPasswordError(event.target.value !== password);
+    setPasswordCheck(event.target.value);
+  };
 
   const [term, setTerm] = useState("");
   const [termError, setTermError] = useState(false);
@@ -51,27 +51,26 @@ export default function SignupForm(props: any) {
         setTermError(true);
         return;
       }
-  
+
       const result = await createUser({
         variables: {
           createUserInput: {
             email: email,
             name: name,
             password: password,
-          }
-        }
+          },
+        },
       });
       alert("가입이 완료되었습니다.");
       router.push("/");
     } catch (error) {
-      alert(error)
+      alert(error);
     }
   };
 
   const onClickUpdate = async () => {
-
     // 업데이트 정보가 안들어왔을 경우 에러처리
-    const updateUserInput = {};
+    const updateUserInput: { name?: string } = {};
     if (name !== "") updateUserInput.name = name;
     // 사진변경 추가하기
 
@@ -80,32 +79,32 @@ export default function SignupForm(props: any) {
         variables: {
           updateUserInput,
         },
-        refetchQueries: [{query: FETCH_USER_LOGGED_IN }]
+        refetchQueries: [{ query: FETCH_USER_LOGGED_IN }],
       });
-      alert('수정이 완료되었습니다.')
-      setName("")
+      alert("수정이 완료되었습니다.");
+      setName("");
     } catch (error) {
       alert(error);
     }
-  }
+  };
 
   return (
     <SignUpFormUI
-        email={email}
-        name={name}
-        password={password}
-        passwordCheck={passwordCheck}
-        passwordError={passwordError}
-        onChangeEmail={onChangeEmail}
-        onChangeName={onChangeName}
-        onChangePassword={onChangePassword}
-        onChangePasswordCheck={onChangePasswordCheck}
-        termError={termError}
-        onChangeTerm={onChangeTerm}
-        onClickSubmit={onClickSubmit}
-        onClickUpdate={onClickUpdate}
-        isEdit={props.isEdit}
-        data={props.data}
+      email={email}
+      name={name}
+      password={password}
+      passwordCheck={passwordCheck}
+      passwordError={passwordError}
+      onChangeEmail={onChangeEmail}
+      onChangeName={onChangeName}
+      onChangePassword={onChangePassword}
+      onChangePasswordCheck={onChangePasswordCheck}
+      termError={termError}
+      onChangeTerm={onChangeTerm}
+      onClickSubmit={onClickSubmit}
+      onClickUpdate={onClickUpdate}
+      isEdit={props.isEdit}
+      data={props.data}
     />
   );
 }
