@@ -1,10 +1,10 @@
-import React, {ChangeEvent, useState} from "react";
+import React, { ChangeEvent, useState } from "react";
 import { useRouter } from "next/router";
 import { useRecoilState } from "recoil";
 import { accessTokenState } from "@/commons/store";
 import { useMutation } from "@apollo/client";
-import LoginFormUI from "./LoginForm.presenter"; 
-import { LOGIN_USER } from "./LoginForm.query";
+import LoginFormUI from "./loginForm.presenter";
+import { LOGIN_USER } from "./loginForm.query";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -23,26 +23,25 @@ export default function LoginForm() {
 
   const onClickLogin = async () => {
     try {
-        const reuslt = await loginUser({
-            variables: {
-                email,
-                password
-            },
-        })
-        const accessToken = reuslt.data?.loginUser.accessToken;
-        console.log(accessToken);
-        if(!accessToken) {
-            console.error("로그인에 실패")
-        }
-        setAccessToken(accessToken);
-        localStorage.setItem("accessToken", accessToken);
+      const reuslt = await loginUser({
+        variables: {
+          email,
+          password,
+        },
+      });
+      const accessToken = reuslt.data?.loginUser.accessToken;
+      console.log(accessToken);
+      if (!accessToken) {
+        console.error("로그인에 실패");
+      }
+      setAccessToken(accessToken);
+      localStorage.setItem("accessToken", accessToken);
 
-        void router.push("/");
-
+      void router.push("/");
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-}
+  };
 
   return (
     <LoginFormUI
