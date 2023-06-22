@@ -1,17 +1,16 @@
 import axios from "axios";
-import {useRouter} from "next/router";
-import {MouseEvent, useEffect, useState} from "react";
-import {Empty} from "antd";
+import { useRouter } from "next/router";
+import { MouseEvent, useEffect, useState } from "react";
+import { Empty } from "antd";
 import AnimalCardSectionUI from "./AnimalCardSection.presenter";
 import {
   convertAnimalSexCdToString,
   convertAnimalNeuterYnToString,
 } from "@/util/animalDataFormatter";
-import {IAnimalFilterProps} from "../AnimalsView.types";
 
 const NUM_ROWS = 20;
 
-export default function AnimalCard(props: IAnimalFilterProps) {
+export default function AnimalCard(props: any) {
   const router = useRouter();
   const [selectedAnimal, setSelectedAnimal] = useState(null);
   const [animalData, setAnimalData] = useState<any[]>([]);

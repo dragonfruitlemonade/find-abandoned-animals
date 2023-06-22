@@ -1,14 +1,13 @@
 import axios from "axios";
-import {useRouter} from "next/router";
-import {MouseEvent, useEffect, useState} from "react";
-import {TableColumnsType} from "antd";
-import {IAnimalListDataType} from "./AnimalList.types";
+import { useRouter } from "next/router";
+import { MouseEvent, useEffect, useState } from "react";
+import { TableColumnsType } from "antd";
+import { IAnimalListDataType } from "./AnimalList.types";
 import AnimalListUI from "./AnimalList.presenter";
-import {IAnimalFilterProps} from "../AnimalsView.types";
 
 const NUM_ROWS = 10;
 
-export default function AnimalList(props: IAnimalFilterProps) {
+export default function AnimalList(props: any) {
   const router = useRouter();
   const [animalData, setAnimalData] = useState<any[]>([]);
   const [startPage, setStartPage] = useState(1);
